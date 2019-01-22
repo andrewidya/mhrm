@@ -41,6 +41,9 @@ class Person(models.Model):
         return self.tax_account
     npwp.short_description = _("NPWP")
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return ('id__iexact', 'name__icontains' )
 
 class PersonFamily(models.Model):
     RELATION = (

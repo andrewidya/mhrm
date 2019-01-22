@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'import_export',
     'debug_toolbar',
     'core',
+    'employee',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/andre/Documents/Developments/mini_hrm/mhrm/static/'
 
+
 # Grappelli Settings
+
 GRAPPELLI_ADMIN_TITLE = "PT Lintech Duta Pratama"
+
+
+# Django Debug Toolbar IP Loopback
 
 INTERNAL_IPS = '127.0.0.1'
