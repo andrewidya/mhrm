@@ -14,6 +14,7 @@ class Employee(models.Model):
                                  null=True, blank=True)
     no_bpjskes = models.CharField(verbose_name=_("No BPJS Kesehatan"), max_length=20,
                                   null=True, blank=True)
+    date_of_hired = models.DateField(verbose_name=_("Date of hired"))
 
     class Meta:
         verbose_name = _("Employee")
@@ -27,6 +28,7 @@ class Employee(models.Model):
         return ('id__iexact', 'person__name__icontains',)
 
 
+# TODO: add monitoring (database view ) for this model
 class Contract(models.Model):
     CONTRACT_TYPE = (
         ('DW', 'Daily Worker'),

@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from import_export.admin import ImportExportMixin
+
 from employee.models import Employee, Contract
 
 # Register your models here.
@@ -10,7 +12,7 @@ class ContractInline(admin.TabularInline):
 
 
 @admin.register(Employee)
-class EmployeeAdmin(admin.ModelAdmin):
+class EmployeeAdmin(ImportExportMixin, admin.ModelAdmin):
     fieldsets = (
         ('2.1. Employee Information', {
             'fields': (('reg_number', 'person'), ('no_bpjstk', 'no_bpjskes')),
@@ -26,7 +28,7 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 
 @admin.register(Contract)
-class ContractAdmin(admin.ModelAdmin):
+class ContractAdmin(ImportExportMixin, admin.ModelAdmin):
     fieldsets = (
         ('2.1. Employee information', {
             'fields': ('employee',),
