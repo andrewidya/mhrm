@@ -26,6 +26,7 @@ class EmployeeAdmin(ImportExportMixin, admin.ModelAdmin):
     )
     list_filter = ('type', )
     readonly_fields = ('type', )
+    list_per_page = 20
     search_fields = ('person__name', 'reg_number')
     raw_id_fields = ('person',)
     autocomplete_lookup_fields = {
@@ -37,7 +38,7 @@ class EmployeeAdmin(ImportExportMixin, admin.ModelAdmin):
         super().save_related(request, form, formsets, change)
         obj = form.instance
         if obj.contract_set.exists():
-            contract = obj.contract_set.last()
+            contract = obj.contract_set.all().order_by('-end_date')[0]
             obj.type = contract.type
             obj.save()
 
