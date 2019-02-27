@@ -12,7 +12,7 @@ class Employee(models.Model):
         ('Staff', 'Staff'),
         ('Unknown', 'Unknown')
     )
-    reg_number = models.CharField(verbose_name=_("NIK"), max_length=9)
+    reg_number = models.CharField(verbose_name=_("NIK"), max_length=9, unique=True)
     person = models.ForeignKey(
         Person, verbose_name=_("Person"), on_delete=models.CASCADE,
         limit_choices_to={'status': 'hired'}

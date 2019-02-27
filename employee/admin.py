@@ -50,7 +50,9 @@ class ContractAdmin(ImportExportMixin, admin.ModelAdmin):
             'fields': ('employee',),
         }),
         ('2.2. Contract information', {
-            'fields': (('no_contract', 'type'), ('start_date', 'end_date'), ('created_date', 'sign_date', )),
+            'fields': (
+                ('no_contract', 'type'), ('start_date', 'end_date'), ('created_date', 'sign_date', )
+            ),
         }),
     )
     readonly_fields = ('created_date',)
