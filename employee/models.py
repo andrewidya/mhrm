@@ -3,9 +3,49 @@ from datetime import date
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from employee.managers import EmployeeManager
 from core.models import Person
 
 # Create your models here.
+class BaseJobModel(models.Model):
+    name = models.CharField(verbose_name=_("Name"), max_length=45)
+    description = models.TextField(verbose_name=_("Description"), blank=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+    @staticmethod
+    def autocomplete_search_fields():
+        return ('id__iexact', 'name__icontains',)
+
+
+class Division(BaseJobModel):
+    class Meta:
+        verbose_name = _("2.6. Division")
+        verbose_name_plural = _("2.6. Division")
+
+
+class JobTitle(BaseJobModel):
+    class Meta:
+        verbose_name = _("2.3. Job Title")
+        verbose_name_plural = _("2.3. Job Title")
+
+
+class Department(BaseJobModel):
+    class Meta:
+        verbose_name = _("2.4. Departement")
+        verbose_name_plural = _("2.4. Departement")
+
+
+class JobRole(BaseJobModel):
+    class Meta:
+        verbose_name = _("2.5. Job Role")
+        verbose_name_plural = _("2.5. Job Role")
+
+
 class Employee(models.Model):
     CONTRACT_TYPE = (
         ('DW', 'Daily Worker'),
@@ -27,6 +67,19 @@ class Employee(models.Model):
     type = models.CharField(
         verbose_name=_("Employment type"), choices=CONTRACT_TYPE, max_length=7, default='Unknown'
     )
+    job_title = models.ForeignKey(
+        JobTitle, verbose_name=_("Job title"),on_delete=models.PROTECT, null=True, blank=True
+    )
+    department = models.ForeignKey(
+        Department, verbose_name=_("Department"), on_delete=models.PROTECT, null=True, blank=True
+    )
+    job_role = models.ForeignKey(
+        JobRole, verbose_name=_("Job Role"), on_delete=models.PROTECT, null=True, blank=True
+    )
+    division = models.ForeignKey(
+        Division, verbose_name=_("Division"), on_delete=models.PROTECT, null=True, blank=True
+    )
+    objects = EmployeeManager()
 
     class Meta:
         verbose_name = _("Employee")
