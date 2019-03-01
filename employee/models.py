@@ -104,8 +104,7 @@ class Employee(models.Model):
     last_contract_end_date.short_description = _("End Date")
 
 
-# TODO: add monitoring (database view ) for this model
-class Contract(models.Model):
+class Contract(models.Model): # TODO: add monitoring (database view ) for this model
     CONTRACT_TYPE = (
         ('DW', 'Daily Worker'),
         ('Staff', 'Staff')
