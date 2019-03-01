@@ -20,7 +20,7 @@ class EducationInline(admin.TabularInline):
 @admin.register(Person)
 class PersonAdmin(ImportExportMixin, ExportActionMixin, admin.ModelAdmin):
     fieldsets = (
-        (None, {
+        ('Personal Information', {
             'fields': ('name', 'id_card', ('birth_city', 'birth_date')),
         }),
         ('Address Information', {

@@ -64,6 +64,7 @@ class Employee(models.Model):
         verbose_name=_("No BPJS Kesehatan"), max_length=20, null=True, blank=True
     )
     date_of_hired = models.DateField(verbose_name=_("Date of hired"))
+    is_permanent = models.BooleanField(verbose_name=_("Permanent"), default=False)
     type = models.CharField(
         verbose_name=_("Employment type"), choices=CONTRACT_TYPE, max_length=7, default='Unknown'
     )
@@ -104,8 +105,7 @@ class Employee(models.Model):
     last_contract_end_date.short_description = _("End Date")
 
 
-# TODO: add monitoring (database view ) for this model
-class Contract(models.Model):
+class Contract(models.Model): # TODO: add monitoring (database view ) for this model
     CONTRACT_TYPE = (
         ('DW', 'Daily Worker'),
         ('Staff', 'Staff')
