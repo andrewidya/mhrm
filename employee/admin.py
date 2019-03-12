@@ -2,7 +2,10 @@ from django.contrib import admin
 
 from import_export.admin import ImportExportMixin
 
-from employee.models import Employee, Contract, JobRole, JobTitle, Department, Division
+from employee.models import (
+    Employee, Contract, JobRole, JobTitle, Department, Division
+)
+from employee.resources import EmployeeExportResource
 
 # Register your models here.
 class ContractInline(admin.TabularInline):
@@ -60,6 +63,7 @@ class EmployeeAdmin(ImportExportMixin, admin.ModelAdmin):
         'fk': ['person', 'job_title', 'department', 'job_role', 'division'],
     }
     inlines = [ContractInline]
+    resource_class = EmployeeExportResource
 
     def save_related(self, request, form, formsets, change):
         super().save_related(request, form, formsets, change)
