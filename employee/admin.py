@@ -51,7 +51,6 @@ class EmployeeAdmin(ImportExportMixin, admin.ModelAdmin):
         'department', 'job_title', 'job_role', 'division', 'contract_count', 'type'
     )
     list_filter = ('type', )
-    readonly_fields = ('type', )
     list_per_page = 20
     search_fields = ('person__name', 'reg_number')
     raw_id_fields = ('person', 'job_title', 'department', 'job_role', 'division')
